@@ -1,26 +1,21 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { FC } from 'react';
+import Code from '~/components/code.component';
+import Detail from '~/components/detail.component';
+import FileUpload from '~/components/file-upload.component';
+import List from '~/components/list.component';
+import { StoreProvider } from '~/store/provider.store';
 
-function App() {
+const App: FC = () => {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <StoreProvider>
+      <div className="max-w-7xl m-auto mt-4">
+        <FileUpload></FileUpload>
+        <Code></Code>
+        <List></List>
+        <Detail></Detail>
+      </div>
+    </StoreProvider>
   );
-}
+};
 
 export default App;
