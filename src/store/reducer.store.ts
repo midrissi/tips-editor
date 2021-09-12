@@ -9,6 +9,11 @@ export const appReducer: Reducer<IAppState, TAction> = (
   action: TAction,
 ): IAppState => {
   switch (action.type) {
+    case EActionType.SET_FILTER:
+      return {
+        ...state,
+        filter: action.payload,
+      };
     case EActionType.SET_ITEMS:
       return {
         ...state,
@@ -19,7 +24,7 @@ export const appReducer: Reducer<IAppState, TAction> = (
         ...state,
         items: remove(
           state.items,
-          (item, index) => index === action.payload,
+          (item, index) => index !== action.payload,
         ),
       };
     case EActionType.SAVE_ITEM: {

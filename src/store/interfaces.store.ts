@@ -27,6 +27,7 @@ export type TItem = IVideoItem | ITextItem;
 export interface IAppState {
   items: TItem[];
   current?: TItem;
+  filter: string;
 }
 
 export enum EActionType {
@@ -34,6 +35,7 @@ export enum EActionType {
   REMOVE_ITEM = 'Remove item',
   SAVE_ITEM = 'SAVE item',
   SET_ITEMS = 'Set Items',
+  SET_FILTER = 'Set filter',
 }
 
 export interface TSetCurrentItemAction {
@@ -59,8 +61,14 @@ export interface TSetItemsAction {
   payload: TItem[];
 }
 
+export interface TSetFilterAction {
+  type: EActionType.SET_FILTER;
+  payload: string;
+}
+
 export type TAction =
   | TSetCurrentItemAction
   | TRemoveItemAction
   | TSaveItemAction
+  | TSetFilterAction
   | TSetItemsAction;

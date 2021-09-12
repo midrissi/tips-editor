@@ -1,10 +1,68 @@
 import { FC, useState } from 'react';
-import { Button, FlexboxGrid, Icon, List, Modal } from 'rsuite';
+import {
+  Button,
+  FlexboxGrid,
+  Icon,
+  List,
+  Modal,
+  Tooltip,
+  Whisper,
+} from 'rsuite';
+import Markdown from 'markdown-to-jsx';
 
-import { removeItem } from '~/store/actions.store';
-import { EItemType, IItem } from '~/store/interfaces.store';
+import { removeItem, setFilter } from '~/store/actions.store';
+import { EItemType, IItem, TItem } from '~/store/interfaces.store';
 import { useStore } from '~/store/provider.store';
 import BreadcrumbComponent from './dumb/breadcrumb.dumb';
+
+const IconComponent: FC<{ item: TItem }> = ({ item }) => {
+  return (
+    <Whisper
+      preventOverflow
+      placement="auto"
+      trigger="click"
+      speaker={({ top, left, ...props }) => {
+        return (
+          <Tooltip style={{ top, left }} {...props}>
+            <article className="prose text-left prose-sm overflow-auto p-1 max-h-80 text-sm">
+              <Markdown
+                options={{
+                  overrides: {
+                    a: {
+                      component: ({ children, ...props }) => {
+                        return (
+                          <a
+                            {...props}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="flex items-center"
+                          >
+                            {children}
+                            <Icon
+                              icon="external-link"
+                              className="ml-1"
+                            />
+                          </a>
+                        );
+                      },
+                    },
+                  },
+                }}
+              >
+                {item.body}
+              </Markdown>
+            </article>
+          </Tooltip>
+        );
+      }}
+    >
+      <Icon
+        icon={item.type === EItemType.VIDEO ? 'film' : 'code'}
+        className="text-gray-300 text-base cursor-pointer"
+      />
+    </Whisper>
+  );
+};
 
 const RemoveModal: FC<{
   item?: IItem;
@@ -54,7 +112,7 @@ const RemoveModal: FC<{
 };
 
 const ItemsList: FC = () => {
-  const [{ items }, dispatch] = useStore();
+  const [{ items, filter }, dispatch] = useStore();
   const [index, setIndex] = useState<number>(-1);
 
   return (
@@ -71,47 +129,51 @@ const ItemsList: FC = () => {
         }}
       ></RemoveModal>
       <List hover>
-        {items.map((item, index) => (
-          <List.Item key={`${item.key}:${index}`} index={index}>
-            <FlexboxGrid>
-              {/*icon*/}
-              <FlexboxGrid.Item
-                colspan={2}
-                className="flex justify-center items-center h-16"
-              >
-                <Icon
-                  icon={
-                    item.type === EItemType.VIDEO ? 'film' : 'code'
-                  }
-                  className="text-gray-300 text-base"
-                />
-              </FlexboxGrid.Item>
-              {/*base info*/}
-              <FlexboxGrid.Item
-                colspan={19}
-                className="flex justify-center h-16 flex-col items-start overflow-hidden"
-              >
-                <BreadcrumbComponent
-                  path={item.key}
-                ></BreadcrumbComponent>
-              </FlexboxGrid.Item>
-              <FlexboxGrid.Item
-                colspan={2}
-                className="flex justify-center items-center h-16"
-              >
-                <Button
-                  color="orange"
-                  appearance="link"
-                  onClick={() => setIndex(index)}
+        {items.map((item, index) => {
+          if (filter && !item.key.startsWith(filter)) {
+            return null;
+          }
+
+          return (
+            <List.Item key={`${item.key}:${index}`} index={index}>
+              <FlexboxGrid>
+                {/*icon*/}
+                <FlexboxGrid.Item
+                  colspan={2}
+                  className="flex justify-center items-center h-16"
                 >
-                  Remove
-                </Button>
-                <span className="p-1">|</span>
-                <Button appearance="link">Edit</Button>
-              </FlexboxGrid.Item>
-            </FlexboxGrid>
-          </List.Item>
-        ))}
+                  <IconComponent item={item} />
+                </FlexboxGrid.Item>
+                {/*base info*/}
+                <FlexboxGrid.Item
+                  colspan={19}
+                  className="flex flex-col justify-center items-start h-16"
+                >
+                  <BreadcrumbComponent
+                    path={item.key}
+                    onClick={({ value }) =>
+                      dispatch(setFilter(value))
+                    }
+                  />
+                </FlexboxGrid.Item>
+                <FlexboxGrid.Item
+                  colspan={2}
+                  className="flex justify-center items-center h-16"
+                >
+                  <Button
+                    color="orange"
+                    appearance="link"
+                    onClick={() => setIndex(index)}
+                  >
+                    Remove
+                  </Button>
+                  <span className="p-1">|</span>
+                  <Button appearance="link">Edit</Button>
+                </FlexboxGrid.Item>
+              </FlexboxGrid>
+            </List.Item>
+          );
+        })}
       </List>
     </>
   );

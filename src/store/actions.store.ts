@@ -5,6 +5,7 @@ import {
   TRemoveItemAction,
   TSaveItemAction,
   TSetCurrentItemAction,
+  TSetFilterAction,
 } from './interfaces.store';
 
 export function setItems(payload: TItem[]): TSetItemsAction {
@@ -36,6 +37,13 @@ export function setCurrentItem(
 ): TSetCurrentItemAction {
   return {
     type: EActionType.SET_CURRENT_ITEM,
+    payload,
+  };
+}
+
+export function setFilter(payload: string): TSetFilterAction {
+  return {
+    type: EActionType.SET_FILTER,
     payload,
   };
 }

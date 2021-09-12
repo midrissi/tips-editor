@@ -1,12 +1,9 @@
 import { FC, useState } from 'react';
 import { Button, Drawer } from 'rsuite';
-import { useStore } from '~/store/provider.store';
 
 const Detail: FC = () => {
   const [show, setShow] = useState(false);
   const close = () => setShow(false);
-  const [state] = useStore();
-  console.info(state);
 
   return (
     <Drawer show={show} onHide={close}>
