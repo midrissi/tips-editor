@@ -1,8 +1,10 @@
 import { FC, useState } from 'react';
 import { Button, FlexboxGrid, Icon, List, Modal } from 'rsuite';
+
 import { removeItem } from '~/store/actions.store';
 import { EItemType, IItem } from '~/store/interfaces.store';
 import { useStore } from '~/store/provider.store';
+import BreadcrumbComponent from './dumb/breadcrumb.dumb';
 
 const RemoveModal: FC<{
   item?: IItem;
@@ -89,9 +91,9 @@ const ItemsList: FC = () => {
                 colspan={19}
                 className="flex justify-center h-16 flex-col items-start overflow-hidden"
               >
-                <div className="pb-1 font-medium whitespace-nowrap">
-                  {item.key}
-                </div>
+                <BreadcrumbComponent
+                  path={item.key}
+                ></BreadcrumbComponent>
               </FlexboxGrid.Item>
               <FlexboxGrid.Item
                 colspan={2}

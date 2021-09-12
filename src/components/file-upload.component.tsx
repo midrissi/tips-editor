@@ -26,7 +26,6 @@ const FileUpload: FC = () => {
           return;
         }
 
-        debugger;
         const result = (await files[0].blobFile?.text()) || '[]';
 
         try {
