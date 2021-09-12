@@ -1,3 +1,4 @@
+import Markdown from 'markdown-to-jsx';
 import { FC, useState } from 'react';
 import {
   Button,
@@ -5,12 +6,14 @@ import {
   Icon,
   List,
   Modal,
-  Tooltip,
+  Popover,
   Whisper,
 } from 'rsuite';
-import Markdown from 'markdown-to-jsx';
-
-import { removeItem, setFilter } from '~/store/actions.store';
+import {
+  removeItem,
+  setCurrentItem,
+  setFilter,
+} from '~/store/actions.store';
 import { EItemType, IItem, TItem } from '~/store/interfaces.store';
 import { useStore } from '~/store/provider.store';
 import BreadcrumbComponent from './dumb/breadcrumb.dumb';
@@ -23,8 +26,24 @@ const IconComponent: FC<{ item: TItem }> = ({ item }) => {
       trigger="click"
       speaker={({ top, left, ...props }) => {
         return (
-          <Tooltip style={{ top, left }} {...props}>
+          <Popover
+            title={(item as any).title || ''}
+            style={{ top, left }}
+            {...props}
+          >
             <article className="prose text-left prose-sm overflow-auto p-1 max-h-80 text-sm">
+              {item.type === EItemType.VIDEO &&
+              item.video.provider === 'youtube' &&
+              item.video.link ? (
+                <iframe
+                  height={200}
+                  width={'100%'}
+                  src={item.video.link}
+                  title={item.title}
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  allowFullScreen
+                ></iframe>
+              ) : null}
               <Markdown
                 options={{
                   overrides: {
@@ -52,7 +71,7 @@ const IconComponent: FC<{ item: TItem }> = ({ item }) => {
                 {item.body}
               </Markdown>
             </article>
-          </Tooltip>
+          </Popover>
         );
       }}
     >
@@ -168,7 +187,12 @@ const ItemsList: FC = () => {
                     Remove
                   </Button>
                   <span className="p-1">|</span>
-                  <Button appearance="link">Edit</Button>
+                  <Button
+                    appearance="link"
+                    onClick={() => dispatch(setCurrentItem(item))}
+                  >
+                    Edit
+                  </Button>
                 </FlexboxGrid.Item>
               </FlexboxGrid>
             </List.Item>

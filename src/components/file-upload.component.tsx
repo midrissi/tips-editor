@@ -40,9 +40,7 @@ const FileUpload: FC = () => {
       }}
       accept="application/json"
     >
-      <div style={styles}>
-        Click or Drag files to this area to upload
-      </div>
+      <div style={styles}>Click or Drag files to this area</div>
     </Uploader>
   );
 };

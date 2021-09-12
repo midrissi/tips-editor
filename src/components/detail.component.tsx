@@ -1,12 +1,15 @@
-import { FC, useState } from 'react';
+import { FC } from 'react';
 import { Button, Drawer } from 'rsuite';
+import { setCurrentItem } from '~/store/actions.store';
+import { useStore } from '~/store/provider.store';
 
 const Detail: FC = () => {
-  const [show, setShow] = useState(false);
-  const close = () => setShow(false);
+  const close = () => dispatch(setCurrentItem(undefined));
+
+  const [{ current }, dispatch] = useStore();
 
   return (
-    <Drawer show={show} onHide={close}>
+    <Drawer show={!!current} onHide={close}>
       <Drawer.Header>
         <Drawer.Title> Item Detail </Drawer.Title>
       </Drawer.Header>
