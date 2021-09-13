@@ -1,0 +1,157 @@
+[
+  {
+    "label": "Main",
+    "value": "editors:webform:properties",
+    "group": "[Webform] Properties panel"
+  },
+  {
+    "label": "Data Access",
+    "value": "editors:webform:properties:dataaccess",
+    "group": "[Webform] Properties panel"
+  },
+  {
+    "label": "Style",
+    "value": "editors:webform:properties:style",
+    "group": "[Webform] Properties panel"
+  },
+  {
+    "label": "CSS Class",
+    "value": "editors:webform:properties:style:css",
+    "group": "[Webform] Properties panel"
+  },
+  {
+    "label": "Color",
+    "value": "editors:webform:properties:style:color",
+    "group": "[Webform] Properties panel"
+  },
+  {
+    "label": "Dimensions",
+    "value": "editors:webform:properties:style:dimensions",
+    "group": "[Webform] Properties panel"
+  },
+  {
+    "label": "Layout",
+    "value": "editors:webform:properties:style:layout",
+    "group": "[Webform] Properties panel"
+  },
+  {
+    "label": "Appearance",
+    "value": "editors:webform:properties:style:appearance",
+    "group": "[Webform] Properties panel"
+  },
+  {
+    "label": "Font",
+    "value": "editors:webform:properties:style:font",
+    "group": "[Webform] Properties panel"
+  },
+  {
+    "label": "Borders",
+    "value": "editors:webform:properties:style:borders",
+    "group": "[Webform] Properties panel"
+  },
+  {
+    "label": "Border Radius",
+    "value": "editors:webform:properties:style:borderRadius",
+    "group": "[Webform] Properties panel"
+  },
+  {
+    "label": "Data Sources",
+    "value": "editors:webform:toolbox:datasources",
+    "group": "[Webform] Toolbox"
+  },
+  {
+    "label": "Styles Lib",
+    "value": "editors:webform:toolbox:styleslib",
+    "group": "[Webform] Toolbox"
+  },
+  {
+    "label": "Outline",
+    "value": "editors:webform:toolbox:outline",
+    "group": "[Webform] Toolbox"
+  },
+  {
+    "label": "Components Section",
+    "value": "editors:webform:toolbox:components",
+    "group": "[Webform] Toolbox"
+  },
+  {
+    "label": "Button",
+    "value": "editors:webform:toolbox:components:button",
+    "group": "[Webform] Components"
+  },
+  {
+    "label": "Text Input",
+    "value": "editors:webform:toolbox:components:textinput",
+    "group": "[Webform] Components"
+  },
+  {
+    "label": "Stylebox",
+    "value": "editors:webform:toolbox:components:stylebox",
+    "group": "[Webform] Components"
+  },
+  {
+    "label": "Radio",
+    "value": "editors:webform:toolbox:components:radio",
+    "group": "[Webform] Components"
+  },
+  {
+    "label": "Range Input",
+    "value": "editors:webform:toolbox:components:rangeinput",
+    "group": "[Webform] Components"
+  },
+  {
+    "label": "Selectbox",
+    "value": "editors:webform:toolbox:components:selectbox",
+    "group": "[Webform] Components"
+  },
+  {
+    "label": "Datatable",
+    "value": "editors:webform:toolbox:components:datatable",
+    "group": "[Webform] Components"
+  },
+  {
+    "label": "Text",
+    "value": "editors:webform:toolbox:components:text",
+    "group": "[Webform] Components"
+  },
+  {
+    "label": "Tabs",
+    "value": "editors:webform:toolbox:components:tabs",
+    "group": "[Webform] Components"
+  },
+  {
+    "label": "Columns",
+    "value": "editors:webform:toolbox:components:columns",
+    "group": "[Webform] Components"
+  },
+  {
+    "label": "Grid",
+    "value": "editors:webform:toolbox:components:grid",
+    "group": "[Webform] Components"
+  },
+  {
+    "label": "Matrix",
+    "value": "editors:webform:toolbox:components:matrix",
+    "group": "[Webform] Components"
+  },
+  {
+    "label": "Image",
+    "value": "editors:webform:toolbox:components:image",
+    "group": "[Webform] Components"
+  },
+  {
+    "label": "Icon",
+    "value": "editors:webform:toolbox:components:icon",
+    "group": "[Webform] Components"
+  },
+  {
+    "label": "Checkbox",
+    "value": "editors:webform:toolbox:components:checkbox",
+    "group": "[Webform] Components"
+  },
+  {
+    "label": "Webform Loader",
+    "value": "editors:webform:toolbox:components:webformloader",
+    "group": "[Webform] Components"
+  }
+]
