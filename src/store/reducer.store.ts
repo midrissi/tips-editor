@@ -1,6 +1,5 @@
+import { remove } from 'lodash';
 import { Reducer } from 'react';
-import { remove, isUndefined } from 'lodash';
-
 import { initialState } from './constants.store';
 import { EActionType, IAppState, TAction } from './interfaces.store';
 
@@ -30,7 +29,7 @@ export const appReducer: Reducer<IAppState, TAction> = (
     case EActionType.SAVE_ITEM: {
       const { index, item } = action.payload;
 
-      if (isUndefined(index)) {
+      if (index >= state.items.length) {
         return {
           ...state,
           items: [...state.items, item],

@@ -52,7 +52,7 @@ export interface TSaveItemAction {
   type: EActionType.SAVE_ITEM;
   payload: {
     item: TItem;
-    index?: number;
+    index: number;
   };
 }
 
