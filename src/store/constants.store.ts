@@ -69,4 +69,5 @@ export const initialState: IAppState = {
       body: '[Some link](https://git-ps.wakanda.io/4d/web-studio/design-system/-/issues/14)',
     },
   ],
+  current: -1,
 };

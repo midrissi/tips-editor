@@ -26,7 +26,7 @@ export type TItem = IVideoItem | ITextItem;
 
 export interface IAppState {
   items: TItem[];
-  current?: TItem;
+  current: number;
   filter: string;
 }
 
@@ -40,7 +40,7 @@ export enum EActionType {
 
 export interface TSetCurrentItemAction {
   type: EActionType.SET_CURRENT_ITEM;
-  payload?: TItem;
+  payload: number;
 }
 
 export interface TRemoveItemAction {

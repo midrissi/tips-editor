@@ -1,7 +1,12 @@
 import { FC, useState } from 'react';
 import ReactJson from 'react-json-view';
 import { Button, Icon, IconButton } from 'rsuite';
-import { setFilter } from '~/store/actions.store';
+import {
+  saveItem,
+  setCurrentItem,
+  setFilter,
+} from '~/store/actions.store';
+import { EItemType } from '~/store/interfaces.store';
 import { useStore } from '~/store/provider.store';
 import BreadcrumbComponent from './dumb/breadcrumb.dumb';
 
@@ -13,6 +18,25 @@ const Code: FC = () => {
     <>
       <div className="w-full flex justify-between flex-row my-3">
         <div className="flex justify-center align-middle">
+          <Button
+            className="mr-4"
+            onClick={() => {
+              dispatch(
+                saveItem(
+                  {
+                    body: '',
+                    key: '',
+                    type: EItemType.TEXT,
+                  },
+                  items.length,
+                ),
+              );
+
+              dispatch(setCurrentItem(items.length));
+            }}
+          >
+            <Icon icon="plus"></Icon>
+          </Button>
           {filter ? (
             <>
               <BreadcrumbComponent
@@ -32,7 +56,6 @@ const Code: FC = () => {
           <IconButton
             appearance={showCode ? 'primary' : 'default'}
             onClick={() => setShowCode(!showCode)}
-            className="rounded-full"
             icon={<Icon icon="code" />}
           />
         </div>

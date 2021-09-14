@@ -189,7 +189,7 @@ const ItemsList: FC = () => {
                   <span className="p-1">|</span>
                   <Button
                     appearance="link"
-                    onClick={() => dispatch(setCurrentItem(item))}
+                    onClick={() => dispatch(setCurrentItem(index))}
                   >
                     Edit
                   </Button>

@@ -33,7 +33,7 @@ export function saveItem(
 }
 
 export function setCurrentItem(
-  payload?: TItem,
+  payload: number,
 ): TSetCurrentItemAction {
   return {
     type: EActionType.SET_CURRENT_ITEM,

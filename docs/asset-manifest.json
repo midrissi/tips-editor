@@ -1,25 +1,25 @@
 {
   "files": {
-    "main.css": "/tags-editor/static/css/main.252740b7.chunk.css",
-    "main.js": "/tags-editor/static/js/main.e3ef82db.chunk.js",
-    "main.js.map": "/tags-editor/static/js/main.e3ef82db.chunk.js.map",
-    "runtime-main.js": "/tags-editor/static/js/runtime-main.561a7cfb.js",
-    "runtime-main.js.map": "/tags-editor/static/js/runtime-main.561a7cfb.js.map",
+    "main.css": "/tags-editor/static/css/main.a198883c.chunk.css",
+    "main.js": "/tags-editor/static/js/main.8fb794a4.chunk.js",
+    "main.js.map": "/tags-editor/static/js/main.8fb794a4.chunk.js.map",
+    "runtime-main.js": "/tags-editor/static/js/runtime-main.3464e924.js",
+    "runtime-main.js.map": "/tags-editor/static/js/runtime-main.3464e924.js.map",
     "static/css/2.12340d02.chunk.css": "/tags-editor/static/css/2.12340d02.chunk.css",
-    "static/js/2.892a8335.chunk.js": "/tags-editor/static/js/2.892a8335.chunk.js",
-    "static/js/2.892a8335.chunk.js.map": "/tags-editor/static/js/2.892a8335.chunk.js.map",
-    "static/js/3.8a845352.chunk.js": "/tags-editor/static/js/3.8a845352.chunk.js",
-    "static/js/3.8a845352.chunk.js.map": "/tags-editor/static/js/3.8a845352.chunk.js.map",
+    "static/js/2.42eafb82.chunk.js": "/tags-editor/static/js/2.42eafb82.chunk.js",
+    "static/js/2.42eafb82.chunk.js.map": "/tags-editor/static/js/2.42eafb82.chunk.js.map",
+    "static/js/3.4664d7ab.chunk.js": "/tags-editor/static/js/3.4664d7ab.chunk.js",
+    "static/js/3.4664d7ab.chunk.js.map": "/tags-editor/static/js/3.4664d7ab.chunk.js.map",
     "index.html": "/tags-editor/index.html",
     "static/css/2.12340d02.chunk.css.map": "/tags-editor/static/css/2.12340d02.chunk.css.map",
-    "static/css/main.252740b7.chunk.css.map": "/tags-editor/static/css/main.252740b7.chunk.css.map",
-    "static/js/2.892a8335.chunk.js.LICENSE.txt": "/tags-editor/static/js/2.892a8335.chunk.js.LICENSE.txt"
+    "static/css/main.a198883c.chunk.css.map": "/tags-editor/static/css/main.a198883c.chunk.css.map",
+    "static/js/2.42eafb82.chunk.js.LICENSE.txt": "/tags-editor/static/js/2.42eafb82.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.561a7cfb.js",
+    "static/js/runtime-main.3464e924.js",
     "static/css/2.12340d02.chunk.css",
-    "static/js/2.892a8335.chunk.js",
-    "static/css/main.252740b7.chunk.css",
-    "static/js/main.e3ef82db.chunk.js"
+    "static/js/2.42eafb82.chunk.js",
+    "static/css/main.a198883c.chunk.css",
+    "static/js/main.8fb794a4.chunk.js"
   ]
 }

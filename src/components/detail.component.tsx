@@ -7,13 +7,13 @@ import {
   FormGroup,
   InputPicker,
 } from 'rsuite';
-import { setCurrentItem } from '~/store/actions.store';
+import { saveItem, setCurrentItem } from '~/store/actions.store';
 import { useStore } from '~/store/provider.store';
 
 const Detail: FC = () => {
-  const close = () => dispatch(setCurrentItem(undefined));
+  const close = () => dispatch(setCurrentItem(-1));
 
-  const [{ current }, dispatch] = useStore();
+  const [{ current, items }, dispatch] = useStore();
   const [data, setData] = useState([]);
 
   useEffect(() => {
@@ -22,12 +22,23 @@ const Detail: FC = () => {
       .then((data) => setData(data));
   }, []);
 
-  if (!current) {
+  if (current < 0) {
     return null;
   }
 
+  const setValue = (key: string, value: any) =>
+    dispatch(
+      saveItem(
+        {
+          ...items[current],
+          [key]: value,
+        },
+        current,
+      ),
+    );
+
   return (
-    <Drawer show={!!current} onHide={close}>
+    <Drawer show={current >= 0} onHide={close}>
       <Drawer.Header>
         <Drawer.Title>Item Detail</Drawer.Title>
       </Drawer.Header>
@@ -38,7 +49,8 @@ const Detail: FC = () => {
             <InputPicker
               data={data}
               groupBy="group"
-              value={current.key}
+              value={items[current].key}
+              onChange={(value) => setValue('key', value)}
             ></InputPicker>
           </FormGroup>
         </Form>
