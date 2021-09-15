@@ -147,6 +147,18 @@ const ItemsList: FC = () => {
           setIndex(-1);
         }}
       ></RemoveModal>
+      {items.length === 0 ? (
+        <div className="text-center bg-[#292d33] border-dashed rounded-md border border-gray-200 p-3">
+          The list is empty. Please upload a valid{' '}
+          <span className="bg-gray-500 p-1 text-xs rounded-md mx-1">
+            JSON file
+          </span>{' '}
+          or use{' '}
+          <a href="tips.json" target="_blank">
+            this example
+          </a>
+        </div>
+      ) : null}
       <List hover>
         {items.map((item, index) => {
           if (filter && !item.key.startsWith(filter)) {
