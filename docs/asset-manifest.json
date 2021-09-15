@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.css": "/tags-editor/static/css/main.a198883c.chunk.css",
-    "main.js": "/tags-editor/static/js/main.e21ce7fd.chunk.js",
-    "main.js.map": "/tags-editor/static/js/main.e21ce7fd.chunk.js.map",
+    "main.css": "/tags-editor/static/css/main.ccab2ff5.chunk.css",
+    "main.js": "/tags-editor/static/js/main.eac8dcff.chunk.js",
+    "main.js.map": "/tags-editor/static/js/main.eac8dcff.chunk.js.map",
     "runtime-main.js": "/tags-editor/static/js/runtime-main.3464e924.js",
     "runtime-main.js.map": "/tags-editor/static/js/runtime-main.3464e924.js.map",
     "static/css/2.12340d02.chunk.css": "/tags-editor/static/css/2.12340d02.chunk.css",
@@ -12,14 +12,14 @@
     "static/js/3.4664d7ab.chunk.js.map": "/tags-editor/static/js/3.4664d7ab.chunk.js.map",
     "index.html": "/tags-editor/index.html",
     "static/css/2.12340d02.chunk.css.map": "/tags-editor/static/css/2.12340d02.chunk.css.map",
-    "static/css/main.a198883c.chunk.css.map": "/tags-editor/static/css/main.a198883c.chunk.css.map",
+    "static/css/main.ccab2ff5.chunk.css.map": "/tags-editor/static/css/main.ccab2ff5.chunk.css.map",
     "static/js/2.86be36f8.chunk.js.LICENSE.txt": "/tags-editor/static/js/2.86be36f8.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.3464e924.js",
     "static/css/2.12340d02.chunk.css",
     "static/js/2.86be36f8.chunk.js",
-    "static/css/main.a198883c.chunk.css",
-    "static/js/main.e21ce7fd.chunk.js"
+    "static/css/main.ccab2ff5.chunk.css",
+    "static/js/main.eac8dcff.chunk.js"
   ]
 }
