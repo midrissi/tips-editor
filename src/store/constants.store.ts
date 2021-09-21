@@ -1,23 +1,11 @@
-import { IAppState, TItem } from './interfaces.store';
+import { IAppState } from './interfaces.store';
 
 export const TIPS_STORAGE_KEY = '__TIPS__';
-
-let items: TItem[] = [];
-
-try {
-  items = JSON.parse(
-    localStorage.getItem(TIPS_STORAGE_KEY) || '[]',
-  ) as TItem[];
-} catch (e) {
-  items = [];
-}
-
-if (!Array.isArray(items)) {
-  items = [];
-}
+export const TIPS_URL =
+  'https://raw.githubusercontent.com/midrissi/Web-studio-TIPS/main/tips.json';
 
 export const initialState: IAppState = {
   filter: '',
-  items,
+  items: [],
   current: -1,
 };

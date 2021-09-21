@@ -5,7 +5,6 @@ import {
   FlexboxGrid,
   Icon,
   List,
-  Modal,
   Popover,
   Whisper,
 } from 'rsuite';
@@ -14,9 +13,10 @@ import {
   setCurrentItem,
   setFilter,
 } from '~/store/actions.store';
-import { EItemType, IItem, TItem } from '~/store/interfaces.store';
+import { EItemType, TItem } from '~/store/interfaces.store';
 import { useStore } from '~/store/provider.store';
 import BreadcrumbComponent from './dumb/breadcrumb.dumb';
+import RemoveModal from './dialogs/confirm-remove.dialog';
 
 const IconComponent: FC<{ item: TItem }> = ({ item }) => {
   return (
@@ -80,53 +80,6 @@ const IconComponent: FC<{ item: TItem }> = ({ item }) => {
         className="text-gray-300 text-base cursor-pointer"
       />
     </Whisper>
-  );
-};
-
-const RemoveModal: FC<{
-  item?: IItem;
-  show: boolean;
-  onConfirm?: (isRemove: boolean) => void;
-}> = ({ show, onConfirm, item }) => {
-  if (!item) {
-    return null;
-  }
-
-  function onHide(isRemove: boolean) {
-    if (onConfirm) {
-      onConfirm(isRemove);
-    }
-  }
-
-  return (
-    <Modal show={show} onHide={() => onHide(false)}>
-      <Modal.Header>
-        <Modal.Title>Confirm</Modal.Title>
-      </Modal.Header>
-      <Modal.Body>
-        Are you sure you want to remove the key:
-        <span className="bg-gray-500 text-xs p-1 rounded-md mx-1">
-          {item.key}
-        </span>{' '}
-        of type:
-        <span className="bg-gray-500 p-1 text-xs rounded-md mx-1">
-          {item.type}
-        </span>
-        ?
-      </Modal.Body>
-      <Modal.Footer>
-        <Button
-          onClick={() => onHide(true)}
-          appearance="primary"
-          color="red"
-        >
-          Remove
-        </Button>
-        <Button onClick={() => onHide(false)} appearance="subtle">
-          Cancel
-        </Button>
-      </Modal.Footer>
-    </Modal>
   );
 };
 

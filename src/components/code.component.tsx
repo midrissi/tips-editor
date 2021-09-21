@@ -1,23 +1,86 @@
-import { FC, useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import ReactJson from 'react-json-view';
 import { Button, Icon, IconButton } from 'rsuite';
 import {
   saveItem,
   setCurrentItem,
   setFilter,
+  setItems,
 } from '~/store/actions.store';
-import { EItemType } from '~/store/interfaces.store';
+import { TIPS_STORAGE_KEY, TIPS_URL } from '~/store/constants.store';
+import { EItemType, TItem } from '~/store/interfaces.store';
 import { useStore } from '~/store/provider.store';
+import ConfirmDialog from './dialogs/confirm.dialog';
 import BreadcrumbComponent from './dumb/breadcrumb.dumb';
 
 const Code: FC = () => {
   const [{ items, filter }, dispatch] = useStore();
   const [showCode, setShowCode] = useState<boolean>(false);
+  const [showRefresh, setShowRefresh] = useState<boolean>(false);
+
+  useEffect(() => {
+    const cache = localStorage.getItem(TIPS_STORAGE_KEY);
+    let items: TItem[] = [];
+
+    if (cache) {
+      try {
+        items = JSON.parse(
+          localStorage.getItem(TIPS_STORAGE_KEY) || '[]',
+        ) as TItem[];
+      } catch (e) {
+        items = [];
+      }
+
+      dispatch(setItems(items));
+      return;
+    }
+
+    refresh();
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const refresh = () =>
+    fetch(TIPS_URL)
+      .then((res) => res.json() as Promise<TItem[]>)
+      .then((json) => dispatch(setItems(json)));
 
   return (
     <>
+      <ConfirmDialog
+        show={showRefresh}
+        yesProps={{ color: 'red' }}
+        onYes={(isYes) => {
+          if (isYes) {
+            refresh();
+          }
+
+          setShowRefresh(false);
+        }}
+      >
+        Reloading the view will fetch the items from:
+        <div className="flex justify-center my-5">
+          <a
+            target="_blank"
+            href={TIPS_URL}
+            className="bg-gray-500 text-xs p-1 rounded-md mx-1"
+            rel="noreferrer"
+          >
+            {TIPS_URL}
+          </a>
+        </div>
+        <span className="text-red-400 underline">
+          All your changes will be lost. Do you want to proceed?
+        </span>
+      </ConfirmDialog>
       <div className="w-full flex justify-between flex-row my-3">
         <div className="flex justify-center align-middle">
+          <Button
+            className="mr-4"
+            onClick={() => setShowRefresh(true)}
+          >
+            <Icon icon="refresh"></Icon>
+          </Button>
           <Button
             className="mr-4"
             onClick={() => {
