@@ -1,25 +1,25 @@
 {
   "files": {
-    "main.css": "/tips-editor/static/css/main.c4128fe2.chunk.css",
-    "main.js": "/tips-editor/static/js/main.f594cafd.chunk.js",
-    "main.js.map": "/tips-editor/static/js/main.f594cafd.chunk.js.map",
-    "runtime-main.js": "/tips-editor/static/js/runtime-main.9803c7db.js",
-    "runtime-main.js.map": "/tips-editor/static/js/runtime-main.9803c7db.js.map",
+    "main.css": "/tips-editor/static/css/main.7bc9583b.chunk.css",
+    "main.js": "/tips-editor/static/js/main.1a12a4c9.chunk.js",
+    "main.js.map": "/tips-editor/static/js/main.1a12a4c9.chunk.js.map",
+    "runtime-main.js": "/tips-editor/static/js/runtime-main.0954ce8c.js",
+    "runtime-main.js.map": "/tips-editor/static/js/runtime-main.0954ce8c.js.map",
     "static/css/2.12340d02.chunk.css": "/tips-editor/static/css/2.12340d02.chunk.css",
-    "static/js/2.bb45bbab.chunk.js": "/tips-editor/static/js/2.bb45bbab.chunk.js",
-    "static/js/2.bb45bbab.chunk.js.map": "/tips-editor/static/js/2.bb45bbab.chunk.js.map",
-    "static/js/3.f6963756.chunk.js": "/tips-editor/static/js/3.f6963756.chunk.js",
-    "static/js/3.f6963756.chunk.js.map": "/tips-editor/static/js/3.f6963756.chunk.js.map",
+    "static/js/2.9f77d2f8.chunk.js": "/tips-editor/static/js/2.9f77d2f8.chunk.js",
+    "static/js/2.9f77d2f8.chunk.js.map": "/tips-editor/static/js/2.9f77d2f8.chunk.js.map",
+    "static/js/3.e135d8b7.chunk.js": "/tips-editor/static/js/3.e135d8b7.chunk.js",
+    "static/js/3.e135d8b7.chunk.js.map": "/tips-editor/static/js/3.e135d8b7.chunk.js.map",
     "index.html": "/tips-editor/index.html",
     "static/css/2.12340d02.chunk.css.map": "/tips-editor/static/css/2.12340d02.chunk.css.map",
-    "static/css/main.c4128fe2.chunk.css.map": "/tips-editor/static/css/main.c4128fe2.chunk.css.map",
-    "static/js/2.bb45bbab.chunk.js.LICENSE.txt": "/tips-editor/static/js/2.bb45bbab.chunk.js.LICENSE.txt"
+    "static/css/main.7bc9583b.chunk.css.map": "/tips-editor/static/css/main.7bc9583b.chunk.css.map",
+    "static/js/2.9f77d2f8.chunk.js.LICENSE.txt": "/tips-editor/static/js/2.9f77d2f8.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
-    "static/js/runtime-main.9803c7db.js",
+    "static/js/runtime-main.0954ce8c.js",
     "static/css/2.12340d02.chunk.css",
-    "static/js/2.bb45bbab.chunk.js",
-    "static/css/main.c4128fe2.chunk.css",
-    "static/js/main.f594cafd.chunk.js"
+    "static/js/2.9f77d2f8.chunk.js",
+    "static/css/main.7bc9583b.chunk.css",
+    "static/js/main.1a12a4c9.chunk.js"
   ]
 }
