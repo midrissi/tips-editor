@@ -1,11 +1,13 @@
 import {
   EActionType,
+  IKeyItem,
   TItem,
-  TSetItemsAction,
   TRemoveItemAction,
   TSaveItemAction,
   TSetCurrentItemAction,
   TSetFilterAction,
+  TSetItemsAction,
+  TSetKeysAction,
 } from './interfaces.store';
 
 export function setItems(payload: TItem[]): TSetItemsAction {
@@ -29,6 +31,13 @@ export function saveItem(
   return {
     type: EActionType.SAVE_ITEM,
     payload: { item, index },
+  };
+}
+
+export function setKeys(keys: IKeyItem[]): TSetKeysAction {
+  return {
+    type: EActionType.SET_KEYS,
+    payload: keys,
   };
 }
 

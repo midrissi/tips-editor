@@ -6,8 +6,9 @@ import {
   Dispatch,
   useEffect,
 } from 'react';
+import { setKeys } from './actions.store';
 import { initialState, TIPS_STORAGE_KEY } from './constants.store';
-import { IAppState, TAction } from './interfaces.store';
+import { IAppState, IKeyItem, TAction } from './interfaces.store';
 import { appReducer } from './reducer.store';
 
 const Store = createContext<[IAppState, Dispatch<TAction>]>([
@@ -31,6 +32,12 @@ export const StoreProvider: FC = ({ children }) => {
       JSON.stringify(globalState.items),
     );
   }, [globalState.items]);
+
+  useEffect(() => {
+    fetch('keys.json')
+      .then((res) => res.json() as Promise<IKeyItem[]>)
+      .then((keys) => dispatch(setKeys(keys)));
+  }, []);
 
   return (
     <Store.Provider value={[globalState, dispatch]}>

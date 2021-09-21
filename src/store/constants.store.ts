@@ -8,4 +8,5 @@ export const initialState: IAppState = {
   filter: '',
   items: [],
   current: -1,
+  keys: [],
 };

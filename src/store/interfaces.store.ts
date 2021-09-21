@@ -24,16 +24,24 @@ export interface ITextItem extends IItem {
 
 export type TItem = IVideoItem | ITextItem;
 
+export interface IKeyItem {
+  label: string;
+  group: string;
+  value: string;
+}
+
 export interface IAppState {
   items: TItem[];
   current: number;
   filter: string;
+  keys: IKeyItem[];
 }
 
 export enum EActionType {
   SET_CURRENT_ITEM = 'Edit item',
   REMOVE_ITEM = 'Remove item',
   SAVE_ITEM = 'SAVE item',
+  SET_KEYS = 'Set Keys',
   SET_ITEMS = 'Set Items',
   SET_FILTER = 'Set filter',
 }
@@ -41,6 +49,11 @@ export enum EActionType {
 export interface TSetCurrentItemAction {
   type: EActionType.SET_CURRENT_ITEM;
   payload: number;
+}
+
+export interface TSetKeysAction {
+  type: EActionType.SET_KEYS;
+  payload: IKeyItem[];
 }
 
 export interface TRemoveItemAction {
@@ -68,6 +81,7 @@ export interface TSetFilterAction {
 
 export type TAction =
   | TSetCurrentItemAction
+  | TSetKeysAction
   | TRemoveItemAction
   | TSaveItemAction
   | TSetFilterAction

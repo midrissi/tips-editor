@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from 'react';
+import { FC } from 'react';
 import {
   Button,
   ControlLabel,
@@ -13,14 +13,7 @@ import { useStore } from '~/store/provider.store';
 const Detail: FC = () => {
   const close = () => dispatch(setCurrentItem(-1));
 
-  const [{ current, items }, dispatch] = useStore();
-  const [data, setData] = useState([]);
-
-  useEffect(() => {
-    fetch('keys.json')
-      .then((res) => res.json())
-      .then((data) => setData(data));
-  }, []);
+  const [{ current, items, keys }, dispatch] = useStore();
 
   if (current < 0) {
     return null;
@@ -47,7 +40,7 @@ const Detail: FC = () => {
           <FormGroup>
             <ControlLabel>Key</ControlLabel>
             <InputPicker
-              data={data}
+              data={keys}
               groupBy="group"
               value={items[current].key}
               onChange={(value) => setValue('key', value)}

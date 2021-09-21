@@ -1,11 +1,12 @@
 import Markdown from 'markdown-to-jsx';
-import { FC, useState } from 'react';
+import { FC, useMemo, useState } from 'react';
 import {
   Button,
   FlexboxGrid,
   Icon,
   List,
   Popover,
+  Tooltip,
   Whisper,
 } from 'rsuite';
 import {
@@ -84,8 +85,12 @@ const IconComponent: FC<{ item: TItem }> = ({ item }) => {
 };
 
 const ItemsList: FC = () => {
-  const [{ items, filter }, dispatch] = useStore();
+  const [{ items, filter, keys }, dispatch] = useStore();
   const [index, setIndex] = useState<number>(-1);
+
+  const keysString = useMemo<string[]>(() => {
+    return keys.map(({ value }) => value);
+  }, [keys]);
 
   return (
     <>
@@ -118,6 +123,8 @@ const ItemsList: FC = () => {
             return null;
           }
 
+          const keyExists = keysString.includes(item.key);
+
           return (
             <List.Item key={`${item.key}:${index}`} index={index}>
               <FlexboxGrid>
@@ -131,9 +138,28 @@ const ItemsList: FC = () => {
                 {/*base info*/}
                 <FlexboxGrid.Item
                   colspan={19}
-                  className="flex flex-col justify-center items-start h-16"
+                  className="flex flex-row h-16"
                 >
+                  {!keyExists && (
+                    <Whisper
+                      trigger="hover"
+                      placement="left"
+                      speaker={
+                        <Tooltip>
+                          <div className="p-2">Key not supported</div>
+                        </Tooltip>
+                      }
+                    >
+                      <Icon
+                        icon="info"
+                        className="flex items-center mr-2 text-red-400 cursor-pointer"
+                      />
+                    </Whisper>
+                  )}
                   <BreadcrumbComponent
+                    style={{
+                      marginLeft: keyExists ? 22 : 'unset',
+                    }}
                     path={item.key}
                     onClick={({ value }) =>
                       dispatch(setFilter(value))

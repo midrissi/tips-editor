@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { CSSProperties, FC, useState } from 'react';
 import { Breadcrumb } from 'rsuite';
 import './breadcrumb.style.css';
 
@@ -20,6 +20,7 @@ const Arrow: FC<ArrowProps> = ({ children, active, ...props }) => {
 
 interface BreadcrumbComponentProps {
   path: string;
+  style?: CSSProperties;
   className?: string;
   onClick?: (ev: { value: string; index: number }) => void;
 }
@@ -28,6 +29,7 @@ const BreadcrumbComponent: FC<BreadcrumbComponentProps> = ({
   path = '',
   onClick,
   className = '',
+  style = {},
 }) => {
   const items = path.split(':');
   const [activeIndex, setActiveIndex] = useState<number>(-1);
@@ -35,6 +37,7 @@ const BreadcrumbComponent: FC<BreadcrumbComponentProps> = ({
   return (
     <Breadcrumb
       separator=""
+      style={style}
       className={`${className} font-medium whitespace-nowrap`}
     >
       {items.map((item, index) => {

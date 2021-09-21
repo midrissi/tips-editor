@@ -17,6 +17,7 @@ const Code: FC = () => {
   const [{ items, filter }, dispatch] = useStore();
   const [showCode, setShowCode] = useState<boolean>(false);
   const [showRefresh, setShowRefresh] = useState<boolean>(false);
+  const [isFetching, setIsFetching] = useState<boolean>(false);
 
   useEffect(() => {
     const cache = localStorage.getItem(TIPS_STORAGE_KEY);
@@ -40,10 +41,13 @@ const Code: FC = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const refresh = () =>
+  const refresh = () => {
+    setIsFetching(true);
     fetch(TIPS_URL)
       .then((res) => res.json() as Promise<TItem[]>)
-      .then((json) => dispatch(setItems(json)));
+      .then((json) => dispatch(setItems(json)))
+      .finally(() => setIsFetching(false));
+  };
 
   return (
     <>
@@ -79,7 +83,7 @@ const Code: FC = () => {
             className="mr-4"
             onClick={() => setShowRefresh(true)}
           >
-            <Icon icon="refresh"></Icon>
+            <Icon icon="refresh" spin={isFetching}></Icon>
           </Button>
           <Button
             className="mr-4"
