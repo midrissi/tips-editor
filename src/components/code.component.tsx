@@ -1,14 +1,19 @@
 import { FC, useEffect, useState } from 'react';
 import ReactJson from 'react-json-view';
-import { Button, Icon, IconButton } from 'rsuite';
+import { Button, ButtonGroup, Icon, IconButton } from 'rsuite';
 import {
+  filterByKey,
+  filterByType,
   saveItem,
   setCurrentItem,
-  setFilter,
   setItems,
 } from '~/store/actions.store';
 import { TIPS_STORAGE_KEY, TIPS_URL } from '~/store/constants.store';
-import { EItemType, TItem } from '~/store/interfaces.store';
+import {
+  EItemType,
+  TFilterType,
+  TItem,
+} from '~/store/interfaces.store';
 import { useStore } from '~/store/provider.store';
 import ConfirmDialog from './dialogs/confirm.dialog';
 import BreadcrumbComponent from './dumb/breadcrumb.dumb';
@@ -49,6 +54,12 @@ const Code: FC = () => {
       .finally(() => setIsFetching(false));
   };
 
+  const ALL_TYPES: TFilterType[] = [
+    '*',
+    EItemType.TEXT,
+    EItemType.VIDEO,
+  ];
+
   return (
     <>
       <ConfirmDialog
@@ -79,12 +90,27 @@ const Code: FC = () => {
       </ConfirmDialog>
       <div className="w-full flex justify-between flex-row my-3">
         <div className="flex justify-center align-middle">
-          <Button
-            className="mr-4"
-            onClick={() => setShowRefresh(true)}
-          >
+          <Button onClick={() => setShowRefresh(true)}>
             <Icon icon="refresh" spin={isFetching}></Icon>
           </Button>
+          <ButtonGroup className="mx-4">
+            {ALL_TYPES.map((type) => (
+              <Button
+                appearance={
+                  filter.type === type ? 'primary' : 'default'
+                }
+                onClick={() => dispatch(filterByType(type))}
+              >
+                {type === '*' ? (
+                  'All'
+                ) : (
+                  <Icon
+                    icon={type === EItemType.TEXT ? 'code' : 'film'}
+                  />
+                )}
+              </Button>
+            ))}
+          </ButtonGroup>
           <Button
             className="mr-4"
             onClick={() => {
@@ -104,15 +130,15 @@ const Code: FC = () => {
           >
             <Icon icon="plus"></Icon>
           </Button>
-          {filter ? (
+          {filter.key ? (
             <>
               <BreadcrumbComponent
-                path={filter}
-                onClick={({ value }) => dispatch(setFilter(value))}
+                path={filter.key}
+                onClick={({ value }) => dispatch(filterByKey(value))}
               />
               <Button
                 appearance="link"
-                onClick={() => dispatch(setFilter(''))}
+                onClick={() => dispatch(filterByKey(''))}
               >
                 Clear
               </Button>

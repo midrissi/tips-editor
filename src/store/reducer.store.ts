@@ -1,4 +1,4 @@
-import { remove, sortBy } from 'lodash';
+import { remove } from 'lodash';
 import { Reducer } from 'react';
 import { initialState } from './constants.store';
 import { EActionType, IAppState, TAction } from './interfaces.store';
@@ -13,15 +13,26 @@ export const appReducer: Reducer<IAppState, TAction> = (
         ...state,
         keys: action.payload,
       };
-    case EActionType.SET_FILTER:
+    case EActionType.FILTER_BY_KEY:
       return {
         ...state,
-        filter: action.payload,
+        filter: {
+          ...state.filter,
+          key: action.payload,
+        },
+      };
+    case EActionType.FILTER_BY_TYPE:
+      return {
+        ...state,
+        filter: {
+          ...state.filter,
+          type: action.payload,
+        },
       };
     case EActionType.SET_ITEMS:
       return {
         ...state,
-        items: sortBy(action.payload, 'key'),
+        items: action.payload,
       };
     case EActionType.REMOVE_ITEM:
       return {

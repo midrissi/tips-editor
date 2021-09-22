@@ -1,13 +1,15 @@
 import {
   EActionType,
   IKeyItem,
+  TFilterType,
   TItem,
   TRemoveItemAction,
   TSaveItemAction,
   TSetCurrentItemAction,
-  TSetFilterAction,
+  TFilterByKeyAction,
   TSetItemsAction,
   TSetKeysAction,
+  TFilterByTypeAction,
 } from './interfaces.store';
 
 export function setItems(payload: TItem[]): TSetItemsAction {
@@ -50,9 +52,18 @@ export function setCurrentItem(
   };
 }
 
-export function setFilter(payload: string): TSetFilterAction {
+export function filterByKey(payload: string): TFilterByKeyAction {
   return {
-    type: EActionType.SET_FILTER,
+    type: EActionType.FILTER_BY_KEY,
+    payload,
+  };
+}
+
+export function filterByType(
+  payload: TFilterType,
+): TFilterByTypeAction {
+  return {
+    type: EActionType.FILTER_BY_TYPE,
     payload,
   };
 }

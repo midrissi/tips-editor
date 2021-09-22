@@ -12,12 +12,13 @@ import {
 import {
   removeItem,
   setCurrentItem,
-  setFilter,
+  filterByKey,
 } from '~/store/actions.store';
 import { EItemType, TItem } from '~/store/interfaces.store';
 import { useStore } from '~/store/provider.store';
 import BreadcrumbComponent from './dumb/breadcrumb.dumb';
 import RemoveModal from './dialogs/confirm-remove.dialog';
+import { IconNames } from 'rsuite/lib/Icon';
 
 const IconComponent: FC<{ item: TItem }> = ({ item }) => {
   return (
@@ -77,7 +78,16 @@ const IconComponent: FC<{ item: TItem }> = ({ item }) => {
       }}
     >
       <Icon
-        icon={item.type === EItemType.VIDEO ? 'film' : 'code'}
+        icon={((): IconNames => {
+          switch (item.type) {
+            case EItemType.TEXT:
+              return 'code';
+            case EItemType.VIDEO:
+              return 'film';
+            default:
+              return 'question';
+          }
+        })()}
         className="text-gray-300 text-base cursor-pointer"
       />
     </Whisper>
@@ -119,7 +129,10 @@ const ItemsList: FC = () => {
       ) : null}
       <List hover>
         {items.map((item, index) => {
-          if (filter && !item.key.startsWith(filter)) {
+          if (
+            !item.key.startsWith(filter.key) ||
+            (filter.type !== '*' && item.type !== filter.type)
+          ) {
             return null;
           }
 
@@ -162,7 +175,7 @@ const ItemsList: FC = () => {
                     }}
                     path={item.key}
                     onClick={({ value }) =>
-                      dispatch(setFilter(value))
+                      dispatch(filterByKey(value))
                     }
                   />
                 </FlexboxGrid.Item>

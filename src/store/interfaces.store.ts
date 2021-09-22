@@ -30,10 +30,15 @@ export interface IKeyItem {
   value: string;
 }
 
+export type TFilterType = '*' | EItemType;
+
 export interface IAppState {
   items: TItem[];
   current: number;
-  filter: string;
+  filter: {
+    key: string;
+    type: TFilterType;
+  };
   keys: IKeyItem[];
 }
 
@@ -43,7 +48,8 @@ export enum EActionType {
   SAVE_ITEM = 'SAVE item',
   SET_KEYS = 'Set Keys',
   SET_ITEMS = 'Set Items',
-  SET_FILTER = 'Set filter',
+  FILTER_BY_KEY = 'Filter by key',
+  FILTER_BY_TYPE = 'Filter by type',
 }
 
 export interface TSetCurrentItemAction {
@@ -74,9 +80,14 @@ export interface TSetItemsAction {
   payload: TItem[];
 }
 
-export interface TSetFilterAction {
-  type: EActionType.SET_FILTER;
+export interface TFilterByKeyAction {
+  type: EActionType.FILTER_BY_KEY;
   payload: string;
+}
+
+export interface TFilterByTypeAction {
+  type: EActionType.FILTER_BY_TYPE;
+  payload: TFilterType;
 }
 
 export type TAction =
@@ -84,5 +95,6 @@ export type TAction =
   | TSetKeysAction
   | TRemoveItemAction
   | TSaveItemAction
-  | TSetFilterAction
+  | TFilterByKeyAction
+  | TFilterByTypeAction
   | TSetItemsAction;
