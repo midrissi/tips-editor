@@ -10,13 +10,15 @@ export interface IMdWithPreviewProps extends InputProps {
 
 const MdWithPreviewComponent: FC<IMdWithPreviewProps> = ({
   value = '',
+  className,
   ...props
 }) => {
   const [isPreview, setIsPreview] = useState(false);
 
   return (
-    <>
+    <div className={className}>
       <ButtonGroupComponent
+        style={{ marginBottom: 10 }}
         data={[
           {
             icon: 'code',
@@ -30,7 +32,6 @@ const MdWithPreviewComponent: FC<IMdWithPreviewProps> = ({
         value={isPreview ? 'preview' : 'code'}
         onChange={(v) => setIsPreview(v === 'preview')}
       />
-      <br style={{ marginBottom: 10 }} />
       {isPreview ? (
         <MdComponent value={value} />
       ) : (
@@ -41,7 +42,7 @@ const MdWithPreviewComponent: FC<IMdWithPreviewProps> = ({
           placeholder="Textarea"
         />
       )}
-    </>
+    </div>
   );
 };
 

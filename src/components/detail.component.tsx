@@ -8,6 +8,7 @@ import {
   FormControl,
   FormGroup,
   Icon,
+  Input,
   Radio,
   RadioGroup,
   Schema,
@@ -20,6 +21,7 @@ import {
 } from '~/store/actions.store';
 import { EItemType, TItem } from '~/store/interfaces.store';
 import { useStore } from '~/store/provider.store';
+import { flattenObj, ObjectType, unflattenObj } from '~/utils/utils';
 import BreadcrumbComponent from './dumb/breadcrumb.dumb';
 import MdWithPreviewComponent from './dumb/md-preview.dumb';
 
@@ -40,18 +42,13 @@ const model = Schema.Model({
     )
     .isRequired('The type is required'),
   body: StringType().isRequired('The content is required'),
-  'video.provider': StringType()
-    .addRule((v, data: TItem) => data.type === EItemType.VIDEO)
-    .isOneOf(['youtube']),
-  'video.url': StringType()
-    .addRule((v, data: TItem) => data.type === EItemType.VIDEO)
-    .isURL('Please specify a valid URL'),
+  'video.link': StringType(),
 });
 
 const Detail: FC = () => {
   const [{ current, items, keys }, dispatch] = useStore();
   const [error, setError] = useState({});
-  const [value, setValue] = useState<TItem>();
+  const [value, setValue] = useState<ObjectType>();
   const formRef = useRef<FormInstance>();
 
   const KEYS = useMemo(
@@ -66,7 +63,7 @@ const Detail: FC = () => {
       return;
     }
 
-    setValue(item);
+    setValue(flattenObj(item));
     setError({});
   }, [items, current]);
 
@@ -131,23 +128,28 @@ const Detail: FC = () => {
               </Radio>
             </FormControl>
           </FormGroup>
-          <Hr />
+          {value?.type === EItemType.VIDEO ? (
+            <>
+              <Hr />
+              <FormGroup>
+                <ControlLabel>Url</ControlLabel>
+                <FormControl
+                  name="video.link"
+                  accepter={Input}
+                  style={{ width: '100%' }}
+                />
+              </FormGroup>
+            </>
+          ) : null}
           <FormGroup>
             <FormControl
               name="body"
               accepter={MdWithPreviewComponent}
               rows={10}
-              style={{ width: '100%' }}
+              style={{ width: '100%', minHeight: 280 }}
+              className="w-full min-h-[326px]"
             />
           </FormGroup>
-          {value?.type === EItemType.VIDEO ? (
-            <>
-              <Hr />
-              <FormGroup>
-                <FormControl name="video.link" />
-              </FormGroup>
-            </>
-          ) : null}
         </Form>
       </Drawer.Body>
       <Drawer.Footer>
@@ -158,7 +160,8 @@ const Detail: FC = () => {
                 return;
               }
 
-              dispatch(saveItem(value!, current));
+              const item = unflattenObj(value!) as TItem;
+              dispatch(saveItem(item, current));
             })
           }
           appearance="primary"

@@ -34,9 +34,7 @@ const IconComponent: FC<{ item: TItem }> = ({ item }) => {
             {...props}
           >
             <article className="prose text-left prose-sm overflow-auto p-1 max-h-80 text-sm">
-              {item.type === EItemType.VIDEO &&
-              item.video.provider === 'youtube' &&
-              item.video.link ? (
+              {item.type === EItemType.VIDEO && item.video.link ? (
                 <iframe
                   height={200}
                   width={'100%'}
