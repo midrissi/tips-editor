@@ -8,6 +8,17 @@ import { StoreProvider } from '~/store/provider.store';
 const App: FC = () => {
   return (
     <StoreProvider>
+      <a
+        className="github-fork-ribbon"
+        href="https://github.com/midrissi/tips-editor"
+        data-ribbon="Fork me on GitHub"
+        title="Fork me on GitHub"
+        target="_blank"
+        rel="noreferrer"
+      >
+        Fork me on GitHub
+      </a>
+
       <div className="max-w-7xl m-auto mt-4">
         <FileUpload></FileUpload>
         <Code></Code>
