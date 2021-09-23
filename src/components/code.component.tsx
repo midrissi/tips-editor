@@ -42,8 +42,6 @@ const Code: FC = () => {
     }
 
     refresh();
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const refresh = () => {
@@ -111,8 +109,9 @@ const Code: FC = () => {
               </Button>
             ))}
           </ButtonGroup>
-          <Button
+          <IconButton
             className="mr-4"
+            icon={<Icon icon="plus" />}
             onClick={() => {
               dispatch(
                 saveItem(
@@ -127,9 +126,7 @@ const Code: FC = () => {
 
               dispatch(setCurrentItem(items.length));
             }}
-          >
-            <Icon icon="plus"></Icon>
-          </Button>
+          />
           {filter.key ? (
             <>
               <BreadcrumbComponent

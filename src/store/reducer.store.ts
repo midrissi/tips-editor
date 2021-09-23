@@ -1,5 +1,6 @@
 import { remove } from 'lodash';
 import { Reducer } from 'react';
+import { sortBy } from 'lodash';
 import { initialState } from './constants.store';
 import { EActionType, IAppState, TAction } from './interfaces.store';
 
@@ -32,7 +33,7 @@ export const appReducer: Reducer<IAppState, TAction> = (
     case EActionType.SET_ITEMS:
       return {
         ...state,
-        items: action.payload,
+        items: sortBy(action.payload, ['key']),
       };
     case EActionType.REMOVE_ITEM:
       return {
@@ -48,12 +49,14 @@ export const appReducer: Reducer<IAppState, TAction> = (
       if (index >= state.items.length) {
         return {
           ...state,
+          current: -1,
           items: [...state.items, item],
         };
       }
 
       return {
         ...state,
+        current: -1,
         items: state.items.map((current, i) =>
           index === i ? item : current,
         ),

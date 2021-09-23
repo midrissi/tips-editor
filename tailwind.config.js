@@ -40,6 +40,10 @@ module.exports = {
               'margin-top': '-1.14em',
               'margin-bottom': '-1.14em',
             },
+            li: {
+              color: theme('colors.white'),
+              fontSize: 12,
+            },
           },
         },
       }),

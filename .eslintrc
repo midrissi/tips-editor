@@ -3,6 +3,7 @@
   "rules": {
     "no-debugger": "warn",
     "@typescript-eslint/no-unused-vars": "error",
-    "quotes": ["error", "single"]
+    "quotes": ["error", "single"],
+    "react-hooks/exhaustive-deps": "off"
   }
 }

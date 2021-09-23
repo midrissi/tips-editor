@@ -1,4 +1,3 @@
-import Markdown from 'markdown-to-jsx';
 import { FC, useMemo, useState } from 'react';
 import {
   Button,
@@ -9,16 +8,17 @@ import {
   Tooltip,
   Whisper,
 } from 'rsuite';
+import { IconNames } from 'rsuite/lib/Icon';
 import {
+  filterByKey,
   removeItem,
   setCurrentItem,
-  filterByKey,
 } from '~/store/actions.store';
 import { EItemType, TItem } from '~/store/interfaces.store';
 import { useStore } from '~/store/provider.store';
-import BreadcrumbComponent from './dumb/breadcrumb.dumb';
 import RemoveModal from './dialogs/confirm-remove.dialog';
-import { IconNames } from 'rsuite/lib/Icon';
+import BreadcrumbComponent from './dumb/breadcrumb.dumb';
+import MdComponent from './dumb/md.dumb';
 
 const IconComponent: FC<{ item: TItem }> = ({ item }) => {
   return (
@@ -46,32 +46,7 @@ const IconComponent: FC<{ item: TItem }> = ({ item }) => {
                   allowFullScreen
                 ></iframe>
               ) : null}
-              <Markdown
-                options={{
-                  overrides: {
-                    a: {
-                      component: ({ children, ...props }) => {
-                        return (
-                          <a
-                            {...props}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="flex items-center"
-                          >
-                            {children}
-                            <Icon
-                              icon="external-link"
-                              className="ml-1"
-                            />
-                          </a>
-                        );
-                      },
-                    },
-                  },
-                }}
-              >
-                {item.body}
-              </Markdown>
+              <MdComponent value={item.body} />
             </article>
           </Popover>
         );
