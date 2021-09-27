@@ -1,4 +1,4 @@
-import { FC, useEffect, useRef, useState } from 'react';
+import { FC, useEffect, useMemo, useRef, useState } from 'react';
 import {
   ControlLabel,
   Form,
@@ -10,8 +10,8 @@ import {
 import { FormInstance } from 'rsuite/lib/Form';
 import HelpBlock from 'rsuite/lib/HelpBlock';
 import { update } from '~/api.service';
-import { TIPS_URL } from '~/store/constants.store';
 import { useStore } from '~/store/provider.store';
+import { getRepoInfo } from '~/utils/utils';
 import PasswordComponent from '../dumb/password.dumb';
 import ConfirmDialog, { ConfirmDialogProps } from './confirm.dialog';
 
@@ -38,6 +38,10 @@ const SaveComponent: FC<ConfirmDialogProps> = ({
     token: '',
   });
   const [{ items }] = useStore();
+  const GITHUB_URL = useMemo(() => {
+    const { branch, owner, path, repo } = getRepoInfo()!;
+    return `https://github.com/${owner}/${repo}/blob/${branch}/${path}`;
+  }, []);
 
   useEffect(() => {
     setValue({
@@ -79,11 +83,11 @@ const SaveComponent: FC<ConfirmDialogProps> = ({
       <div className="flex justify-center my-5">
         <a
           target="_blank"
-          href={TIPS_URL}
+          href={GITHUB_URL}
           className="bg-gray-500 text-xs p-1 rounded-md mx-1"
           rel="noreferrer"
         >
-          {TIPS_URL}
+          {GITHUB_URL}
         </a>
       </div>
       <Form
