@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.css": "/tips-editor/static/css/main.3f814516.chunk.css",
-    "main.js": "/tips-editor/static/js/main.dcbf4376.chunk.js",
-    "main.js.map": "/tips-editor/static/js/main.dcbf4376.chunk.js.map",
+    "main.css": "/tips-editor/static/css/main.d193cff7.chunk.css",
+    "main.js": "/tips-editor/static/js/main.59ad416a.chunk.js",
+    "main.js.map": "/tips-editor/static/js/main.59ad416a.chunk.js.map",
     "runtime-main.js": "/tips-editor/static/js/runtime-main.cb2ad622.js",
     "runtime-main.js.map": "/tips-editor/static/js/runtime-main.cb2ad622.js.map",
     "static/css/2.12340d02.chunk.css": "/tips-editor/static/css/2.12340d02.chunk.css",
@@ -12,14 +12,14 @@
     "static/js/3.6f4da19f.chunk.js.map": "/tips-editor/static/js/3.6f4da19f.chunk.js.map",
     "index.html": "/tips-editor/index.html",
     "static/css/2.12340d02.chunk.css.map": "/tips-editor/static/css/2.12340d02.chunk.css.map",
-    "static/css/main.3f814516.chunk.css.map": "/tips-editor/static/css/main.3f814516.chunk.css.map",
+    "static/css/main.d193cff7.chunk.css.map": "/tips-editor/static/css/main.d193cff7.chunk.css.map",
     "static/js/2.964f65f9.chunk.js.LICENSE.txt": "/tips-editor/static/js/2.964f65f9.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.cb2ad622.js",
     "static/css/2.12340d02.chunk.css",
     "static/js/2.964f65f9.chunk.js",
-    "static/css/main.3f814516.chunk.css",
-    "static/js/main.dcbf4376.chunk.js"
+    "static/css/main.d193cff7.chunk.css",
+    "static/js/main.59ad416a.chunk.js"
   ]
 }
