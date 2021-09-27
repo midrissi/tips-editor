@@ -1,17 +1,17 @@
 import { FC } from 'react';
 import { Button, ButtonProps, Modal } from 'rsuite';
 
-const ConfirmDialog: FC<
-  Partial<{
-    show: boolean;
-    title: string;
-    yesLabel: string;
-    noLabel: string;
-    yesProps: ButtonProps;
-    noProps: ButtonProps;
-    onYes: (isYes: boolean) => void;
-  }>
-> = ({
+export type ConfirmDialogProps = Partial<{
+  show: boolean;
+  title: string;
+  yesLabel: string;
+  noLabel: string;
+  yesProps: ButtonProps;
+  noProps: ButtonProps;
+  onYes: (isYes: boolean) => void;
+}>;
+
+const ConfirmDialog: FC<ConfirmDialogProps> = ({
   show,
   onYes,
   title = 'Confirm',

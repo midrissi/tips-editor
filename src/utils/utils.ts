@@ -1,4 +1,5 @@
 import { set } from 'lodash';
+import { TIPS_URL } from '~/store/constants.store';
 
 export type ObjectType = {
   [key: string]: any;
@@ -38,4 +39,23 @@ export const unflattenObj = (object: ObjectType): ObjectType => {
   }
 
   return result;
+};
+
+interface IRepoInfo {
+  owner: string;
+  repo: string;
+  branch: string;
+  path: string;
+}
+
+export const getRepoInfo = (): IRepoInfo | undefined => {
+  const REGEX =
+    /^https:\/\/raw\.githubusercontent\.com\/(?<owner>[^/]*)\/(?<repo>[^/]*)\/(?<branch>[^/]*)\/(?<path>.*)/;
+  const match = REGEX.exec(TIPS_URL);
+
+  if (!match) {
+    return undefined;
+  }
+
+  return match.groups as unknown as IRepoInfo;
 };

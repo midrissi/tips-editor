@@ -1,6 +1,7 @@
 import { FC, useEffect, useState } from 'react';
 import ReactJson from 'react-json-view';
 import { Button, ButtonGroup, Icon, IconButton } from 'rsuite';
+import { fetchItems } from '~/api.service';
 import {
   filterByKey,
   filterByType,
@@ -16,12 +17,14 @@ import {
 } from '~/store/interfaces.store';
 import { useStore } from '~/store/provider.store';
 import ConfirmDialog from './dialogs/confirm.dialog';
+import SaveComponent from './dialogs/save.dialog';
 import BreadcrumbComponent from './dumb/breadcrumb.dumb';
 
 const Code: FC = () => {
   const [{ items, filter }, dispatch] = useStore();
   const [showCode, setShowCode] = useState<boolean>(false);
   const [showRefresh, setShowRefresh] = useState<boolean>(false);
+  const [showSave, setShowSave] = useState<boolean>(false);
   const [isFetching, setIsFetching] = useState<boolean>(false);
 
   useEffect(() => {
@@ -46,8 +49,7 @@ const Code: FC = () => {
 
   const refresh = () => {
     setIsFetching(true);
-    fetch(TIPS_URL)
-      .then((res) => res.json() as Promise<TItem[]>)
+    fetchItems()
       .then((json) => dispatch(setItems(json)))
       .finally(() => setIsFetching(false));
   };
@@ -86,10 +88,20 @@ const Code: FC = () => {
           All your changes will be lost. Do you want to proceed?
         </span>
       </ConfirmDialog>
+      <SaveComponent
+        show={showSave}
+        onYes={() => setShowSave(false)}
+      />
       <div className="w-full flex justify-between flex-row my-3">
         <div className="flex justify-center align-middle">
-          <Button onClick={() => setShowRefresh(true)}>
+          <Button
+            className="mr-4"
+            onClick={() => setShowRefresh(true)}
+          >
             <Icon icon="refresh" spin={isFetching}></Icon>
+          </Button>
+          <Button onClick={() => setShowSave(true)}>
+            <Icon icon="save"></Icon>
           </Button>
           <ButtonGroup className="mx-4">
             {ALL_TYPES.map((type) => (
