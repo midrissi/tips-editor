@@ -103,17 +103,6 @@ const SaveComponent: FC<ConfirmDialogProps> = ({
             autoComplete="off"
             accepter={PasswordComponent}
           />
-          <HelpBlock>
-            The Token can be generated{' '}
-            <a
-              href="https://github.com/settings/tokens/new"
-              target="_blank"
-              rel="noreferrer"
-            >
-              from here
-            </a>
-            .
-          </HelpBlock>
         </FormGroup>
         <FormGroup controlId="message">
           <ControlLabel>Message</ControlLabel>
@@ -124,6 +113,26 @@ const SaveComponent: FC<ConfirmDialogProps> = ({
             rows={5}
             placeholder="Put your commit message here"
           />
+          <HelpBlock>
+            The Token can be generated{' '}
+            <a
+              href="https://github.com/settings/tokens/new"
+              target="_blank"
+              rel="noreferrer"
+            >
+              from here
+            </a>
+            . Make sure that the{' '}
+            <span className="bg-gray-500 text-xs p-1 rounded-md mx-1">
+              public_repo
+            </span>{' '}
+            scope is checked.
+            <img
+              className="my-4"
+              src="github_token.png"
+              alt="Github Token"
+            />
+          </HelpBlock>
         </FormGroup>
       </Form>
     </ConfirmDialog>
