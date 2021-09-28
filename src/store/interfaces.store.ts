@@ -30,7 +30,7 @@ export interface IKeyItem {
   value: string;
 }
 
-export type TFilterType = '*' | EItemType;
+export type TFilterType = '*' | '!' | '?' | EItemType;
 
 export interface IAppState {
   items: TItem[];

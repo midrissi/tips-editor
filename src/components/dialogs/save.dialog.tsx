@@ -1,4 +1,4 @@
-import { FC, useEffect, useMemo, useRef, useState } from 'react';
+import { FC, useEffect, useRef, useState } from 'react';
 import {
   ControlLabel,
   Form,
@@ -11,7 +11,7 @@ import { FormInstance } from 'rsuite/lib/Form';
 import HelpBlock from 'rsuite/lib/HelpBlock';
 import { update } from '~/api.service';
 import { useStore } from '~/store/provider.store';
-import { getRepoInfo } from '~/utils/utils';
+import { getFilePath } from '~/utils/utils';
 import PasswordComponent from '../dumb/password.dumb';
 import ConfirmDialog, { ConfirmDialogProps } from './confirm.dialog';
 
@@ -38,10 +38,6 @@ const SaveComponent: FC<ConfirmDialogProps> = ({
     token: '',
   });
   const [{ items }] = useStore();
-  const GITHUB_URL = useMemo(() => {
-    const { branch, owner, path, repo } = getRepoInfo()!;
-    return `https://github.com/${owner}/${repo}/blob/${branch}/${path}`;
-  }, []);
 
   useEffect(() => {
     setValue({
@@ -58,13 +54,13 @@ const SaveComponent: FC<ConfirmDialogProps> = ({
     }
 
     update(items, value?.message, value?.token)
+      .then(() => onYes(true))
       .catch((e) => {
-        alert(
-          'Error while updating the file. Check the console for more info',
-        );
+        setError({
+          token: `Error while updating the file: ${e.message}`,
+        });
         console.error(e);
-      })
-      .finally(() => onYes(true));
+      });
   };
 
   return (
@@ -83,11 +79,11 @@ const SaveComponent: FC<ConfirmDialogProps> = ({
       <div className="flex justify-center my-5">
         <a
           target="_blank"
-          href={GITHUB_URL}
+          href={getFilePath()}
           className="bg-gray-500 text-xs p-1 rounded-md mx-1"
           rel="noreferrer"
         >
-          {GITHUB_URL}
+          {getFilePath()}
         </a>
       </div>
       <Form
@@ -123,6 +119,7 @@ const SaveComponent: FC<ConfirmDialogProps> = ({
               href="https://github.com/settings/tokens/new"
               target="_blank"
               rel="noreferrer"
+              className="underline"
             >
               from here
             </a>

@@ -16,9 +16,49 @@ import {
   TItem,
 } from '~/store/interfaces.store';
 import { useStore } from '~/store/provider.store';
+import { getRepoLink } from '~/utils/utils';
 import ConfirmDialog from './dialogs/confirm.dialog';
 import SaveComponent from './dialogs/save.dialog';
 import BreadcrumbComponent from './dumb/breadcrumb.dumb';
+
+const FilterItem: FC<{ type: TFilterType }> = ({ type }) => {
+  switch (type) {
+    case '*':
+      return <span>All</span>;
+    case '!':
+      return <Icon icon="info" />;
+    case EItemType.VIDEO:
+      return <Icon icon="film" />;
+    case EItemType.TEXT:
+      return <Icon icon="code" />;
+  }
+  return <Icon icon="question-circle2" />;
+};
+
+const FilterComponent: FC = () => {
+  const [{ filter }, dispatch] = useStore();
+
+  const ALL_TYPES: TFilterType[] = [
+    '*',
+    EItemType.TEXT,
+    EItemType.VIDEO,
+    '!',
+    '?',
+  ];
+
+  return (
+    <ButtonGroup className="mx-4">
+      {ALL_TYPES.map((type) => (
+        <Button
+          appearance={filter.type === type ? 'primary' : 'default'}
+          onClick={() => dispatch(filterByType(type))}
+        >
+          <FilterItem type={type} />
+        </Button>
+      ))}
+    </ButtonGroup>
+  );
+};
 
 const Code: FC = () => {
   const [{ items, filter }, dispatch] = useStore();
@@ -54,12 +94,6 @@ const Code: FC = () => {
       .finally(() => setIsFetching(false));
   };
 
-  const ALL_TYPES: TFilterType[] = [
-    '*',
-    EItemType.TEXT,
-    EItemType.VIDEO,
-  ];
-
   return (
     <>
       <ConfirmDialog
@@ -85,7 +119,8 @@ const Code: FC = () => {
           </a>
         </div>
         <span className="text-red-400 underline">
-          All your changes will be lost. Do you want to proceed?
+          All your changes will be lost. Are you sure you want to
+          proceed?
         </span>
       </ConfirmDialog>
       <SaveComponent
@@ -100,27 +135,13 @@ const Code: FC = () => {
           >
             <Icon icon="refresh" spin={isFetching}></Icon>
           </Button>
-          <Button onClick={() => setShowSave(true)}>
+          <Button className="mr-4" onClick={() => setShowSave(true)}>
             <Icon icon="save"></Icon>
           </Button>
-          <ButtonGroup className="mx-4">
-            {ALL_TYPES.map((type) => (
-              <Button
-                appearance={
-                  filter.type === type ? 'primary' : 'default'
-                }
-                onClick={() => dispatch(filterByType(type))}
-              >
-                {type === '*' ? (
-                  'All'
-                ) : (
-                  <Icon
-                    icon={type === EItemType.TEXT ? 'code' : 'film'}
-                  />
-                )}
-              </Button>
-            ))}
-          </ButtonGroup>
+          <Button as="a" target="_blank" href={getRepoLink()}>
+            <Icon icon="github"></Icon>
+          </Button>
+          <FilterComponent />
           <IconButton
             className="mr-4"
             icon={<Icon icon="plus" />}

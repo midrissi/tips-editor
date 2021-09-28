@@ -1,4 +1,4 @@
-import { set } from 'lodash';
+import { set, memoize } from 'lodash';
 import { TIPS_URL } from '~/store/constants.store';
 
 export type ObjectType = {
@@ -48,7 +48,7 @@ interface IRepoInfo {
   path: string;
 }
 
-export const getRepoInfo = (): IRepoInfo | undefined => {
+export const getRepoInfo = memoize((): IRepoInfo | undefined => {
   const REGEX =
     /^https:\/\/raw\.githubusercontent\.com\/(?<owner>[^/]*)\/(?<repo>[^/]*)\/(?<branch>[^/]*)\/(?<path>.*)/;
   const match = REGEX.exec(TIPS_URL);
@@ -58,4 +58,28 @@ export const getRepoInfo = (): IRepoInfo | undefined => {
   }
 
   return match.groups as unknown as IRepoInfo;
-};
+});
+
+export const getRepoLink = memoize((): string => {
+  const infos = getRepoInfo();
+
+  if (!infos) {
+    return '#';
+  }
+
+  const { owner, repo, branch } = infos;
+
+  return `https://github.com/${owner}/${repo}/tree/${branch}`;
+});
+
+export const getFilePath = memoize((): string => {
+  const infos = getRepoInfo();
+
+  if (!infos) {
+    return '#';
+  }
+
+  const { owner, repo, branch, path } = infos;
+
+  return `https://github.com/${owner}/${repo}/tree/${branch}/${path}`;
+});

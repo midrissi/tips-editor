@@ -75,6 +75,34 @@ const ItemsList: FC = () => {
     return keys.map(({ value }) => value);
   }, [keys]);
 
+  const filtered = items.filter((item) => {
+    if (!item.key.startsWith(filter.key)) {
+      return false;
+    }
+
+    if (
+      !['*', '!', '?'].includes(filter.type) &&
+      item.type !== filter.type
+    ) {
+      return false;
+    }
+
+    const keyExists = keysString.includes(item.key);
+
+    if (filter.type === '!' && keyExists) {
+      return false;
+    }
+
+    if (
+      filter.type === '?' &&
+      [EItemType.TEXT, EItemType.VIDEO].includes(item.type)
+    ) {
+      return false;
+    }
+
+    return true;
+  });
+
   return (
     <>
       <RemoveModal
@@ -100,17 +128,14 @@ const ItemsList: FC = () => {
           </a>
         </div>
       ) : null}
+      {items.length > 0 && filtered.length === 0 ? (
+        <div className="text-center bg-[#292d33] border-dashed rounded-md border border-gray-200 p-3">
+          The list is empty. Please change your filter
+        </div>
+      ) : null}
       <List hover>
-        {items.map((item, index) => {
-          if (
-            !item.key.startsWith(filter.key) ||
-            (filter.type !== '*' && item.type !== filter.type)
-          ) {
-            return null;
-          }
-
+        {filtered.map((item, index) => {
           const keyExists = keysString.includes(item.key);
-
           return (
             <List.Item key={`${item.key}:${index}`} index={index}>
               <FlexboxGrid>
